@@ -9,12 +9,22 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 
 	public float jumpPower;
+    private bool grounded;
 
 	public GameObject bullet;
 	public Transform bulletSpawn;
 
 	public float fireRate;
 	private float nextFire;
+	public float turnSpeed = 0.25f;
+
+    public GameObject camera;
+    public GameObject costume;
+    public float costumeSwingFactor = 0.9f;
+
+    [SerializeField]
+    public Transform turretPrefab;
+
 
     void Start() {
     	rb = GetComponent<Rigidbody>();
@@ -31,27 +41,43 @@ public class PlayerController : MonoBehaviour
     	float moveHorizontal = Input.GetAxis("Horizontal");
     	float moveVertical = Input.GetAxis("Vertical");
 
-    	Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+    	Vector3 movement =  camera.transform.rotation * new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
     	rb.AddForce(movement * speed);
 
-    	updateJump();
+
+        costume.transform.position = Vector3.Lerp(costume.transform.position, transform.position, costumeSwingFactor);
+
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Debug.Log("space");
+            if (grounded) {
+                grounded = false;
+                rb.AddForce(Vector3.up * jumpPower);
+                Debug.Log("jump!");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("spawn turret!");
+            Object.Instantiate(turretPrefab, transform.position + camera.transform.rotation * Vector3.forward * 2f, camera.transform.rotation);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        grounded = true;
     }
 
     // void updateShoot() {
     // 	Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
     // }
 
-  //   void updateHook() {
-  //   	if (Input.GetKeyDown("z")) {
-			
-		// }
-  //   }
+    //   void updateHook() {
+    //   	if (Input.GetKeyDown("z")) {
 
-    void updateJump() {
-    	if (Input.GetKeyDown("space")) {
-			Vector3 movement = new Vector3(0.0f, 1.0f, 0.0f);
-			rb.AddForce(movement * jumpPower);
-		}
-    }
+    // }
+    //   }
+
 }
