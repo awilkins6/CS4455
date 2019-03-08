@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
 
+    public bool nearShop = false;
+
     [SerializeField]
     public Transform turretPrefab;
 
@@ -68,6 +70,16 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         grounded = true;
+    }
+
+    public void closeToShop()
+    {
+        nearShop = true;
+    }
+
+    public void notCloseToShop()
+    {
+        nearShop = false;
     }
 
     // void updateShoot() {
