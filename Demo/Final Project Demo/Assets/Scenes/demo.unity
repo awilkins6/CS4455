@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4495015, g: 0.49649608, b: 0.5591463, a: 1}
+  m_IndirectSpecularColor: {r: 0.44950122, g: 0.49649537, b: 0.5591459, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -705,6 +705,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 868227026}
+  - component: {fileID: 868227028}
+  - component: {fileID: 868227027}
   m_Layer: 0
   m_Name: Spaceman
   m_TagString: Untagged
@@ -733,6 +735,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868227027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868227025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68258ec67bdf4151a39fa2020d830a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 0}
+--- !u!135 &868227028
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868227025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.8945358
+  m_Center: {x: -1.125807, y: -0.020915985, z: -0.07736707}
 --- !u!1 &915383903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1325,7 @@ MonoBehaviour:
   camera: {fileID: 2007018899}
   costume: {fileID: 173503407}
   costumeSwingFactor: 0.5
+  nearShop: 0
   turretPrefab: {fileID: 2752212751396865002, guid: 45a756ce1c8c14ee7818cadd1c253e46,
     type: 3}
 --- !u!54 &1417602658
@@ -1381,7 +1410,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417602656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.16, y: 1, z: 0.06}
+  m_LocalPosition: {x: -6.71, y: 1.03, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2004929940}
