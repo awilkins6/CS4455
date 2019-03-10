@@ -13,12 +13,14 @@ public class GrappleController : MonoBehaviour
     public bool hooked;
     public static bool fired;
 
+    public GameObject hookedObject;
+
     public float maxDistance;
     private float currentDistance;
 
     void Update()
     {
-        //firing hook
+        //firing hook by left clicking mouse
         if (Input.GetMouseButton(0) && fired == false)
         {
             fired = true;
@@ -36,8 +38,10 @@ public class GrappleController : MonoBehaviour
             }
         }
 
+        // if the hook was launched and collided with a hookable obj
         if (hooked == true)
         {
+            hook.transform.parent = hookedObject.transform;
             transform.position = Vector3.MoveTowards(transform.position, hook.transform.position, Time.deltaTime * playerTravelSpeed);
             float distanceToHook = Vector3.Distance(transform.position, hook.transform.position);
 
@@ -50,6 +54,7 @@ public class GrappleController : MonoBehaviour
 
         } else
         {
+            hook.transform.parent = hookHolder.transform;
             this.GetComponent<Rigidbody>().useGravity = true;
         }
     }
