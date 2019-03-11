@@ -63,12 +63,22 @@
     <Compile Include="Assets\AttachHook.cs" />
     <Compile Include="Assets\Scripts\BulletSpawnController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CockpitPickUp.cs" />
+    <Compile Include="Assets\Scripts\CollectablePickUp.cs" />
+    <Compile Include="Assets\Scripts\CollectableProximity.cs" />
+    <Compile Include="Assets\Scripts\DayAndNightControl.cs" />
     <Compile Include="Assets\Scripts\FollowScript.cs" />
     <Compile Include="Assets\Scripts\GrappleController.cs" />
     <Compile Include="Assets\Scripts\HookDetector.cs" />
+    <Compile Include="Assets\Scripts\OpenShop.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\SatellitePickUp.cs" />
     <Compile Include="Assets\Scripts\UICountdownScript.cs" />
+    <Compile Include="Assets\Scripts\WrenchPickUp.cs" />
     <Compile Include="Assets\SimpleCarController.cs" />
+    <None Include="Assets\Space Kit\License.txt" />
+    <None Include="Assets\Wrench\Shaders\Shader_DX9.shader" />
+    <None Include="Assets\Wrench\Shaders\Shader_DX11.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/admin/Desktop/CS4455/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
