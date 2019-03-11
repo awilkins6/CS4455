@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AttachHook.cs" />
+    <Compile Include="Assets\Scripts\AlienScript.cs" />
     <Compile Include="Assets\Scripts\BulletSpawnController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\CockpitPickUp.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="Assets\Scripts\OpenShop.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SatellitePickUp.cs" />
+    <Compile Include="Assets\Scripts\ShipMarkerScript.cs" />
+    <Compile Include="Assets\Scripts\TurretScript.cs" />
     <Compile Include="Assets\Scripts\UICountdownScript.cs" />
     <Compile Include="Assets\Scripts\WrenchPickUp.cs" />
     <Compile Include="Assets\SimpleCarController.cs" />
