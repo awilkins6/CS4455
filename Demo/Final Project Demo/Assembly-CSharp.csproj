@@ -53,17 +53,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
+     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\FollowScript.cs" />
+     <Compile Include="Assets\Scripts\GameQuitter.cs" />
+     <Compile Include="Assets\Scripts\GameStarter.cs" />
+     <Compile Include="Assets\Scripts\PauseMenuToggle.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\SceneStart.cs" />
      <Compile Include="Assets\Scripts\UICountdownScript.cs" />
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\FirstPersonController_EXAMPLE.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\MouseLook_EXAMPLE.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\RollerBall\Scripts\Ball.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\RollerBall\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
+     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\Scripts\DayAndNightControl.cs" />
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\Scripts\VisualClockController.cs" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\ToonShading\Shaders\ToonBasic.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\Projectors\Guidelines.txt" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\ImageEffects\Readme.txt" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\ToonShading\Shaders\ToonLit.shader" />
      <None Include="Assets\Simple_Day_and_Night_Cycle\ReadMe.txt" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\Projectors\Shaders\ProjectorLight.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\RollerBall\RollerBallGuidelines.txt" />
+     <None Include="Assets\Simple_Day_and_Night_Cycle\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Alezx/AlexanderWilkins/GeorgiaTechClasses/Spring2019/CS4455/Final Project/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -634,6 +667,10 @@
  <Reference Include="System.Xml.Serialization">
  <HintPath>D:/Program Files/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{80C4F93B-6037-8155-7264-4E2A6A6FBE4C}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

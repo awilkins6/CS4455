@@ -1,10 +1,14 @@
 using System;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 
+namespace UnityStandardAssets.Characters.FirstPerson
+{
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
-    public class FirstPersonController_EXAMPLE : MonoBehaviour
+    public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
@@ -13,9 +17,12 @@ using Random = UnityEngine.Random;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
-		[SerializeField] private MouseLook_EXAMPLE m_MouseLook;
+        [SerializeField] private MouseLook m_MouseLook;
         [SerializeField] private bool m_UseFovKick;
+        [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
+        [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
+        [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
@@ -41,7 +48,8 @@ using Random = UnityEngine.Random;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
-
+            m_FovKick.Setup(m_Camera);
+            m_HeadBob.Setup(m_Camera, m_StepInterval);
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
@@ -57,11 +65,12 @@ using Random = UnityEngine.Random;
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-				m_Jump = Input.GetButton("Jump");
+                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
+                StartCoroutine(m_JumpBob.DoBobCycle());
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
@@ -93,7 +102,7 @@ using Random = UnityEngine.Random;
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f);
+                               m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
             m_MoveDir.x = desiredMove.x*speed;
@@ -120,6 +129,8 @@ using Random = UnityEngine.Random;
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
+
+            m_MouseLook.UpdateCursorLock();
         }
 
 
@@ -175,16 +186,16 @@ using Random = UnityEngine.Random;
             }
             if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
             {
-              //  m_Camera.transform.localPosition =
-              //      m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-               //                       (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+                m_Camera.transform.localPosition =
+                    m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
+                                      (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
                 newCameraPosition = m_Camera.transform.localPosition;
-                newCameraPosition.y = m_Camera.transform.localPosition.y;
+                newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }
             else
             {
                 newCameraPosition = m_Camera.transform.localPosition;
-                newCameraPosition.y = m_OriginalCameraPosition.y;
+                newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
             m_Camera.transform.localPosition = newCameraPosition;
         }
@@ -193,8 +204,8 @@ using Random = UnityEngine.Random;
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
             bool waswalking = m_IsWalking;
 
@@ -218,7 +229,7 @@ using Random = UnityEngine.Random;
             if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
             {
                 StopAllCoroutines();
-            //    StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
+                StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
         }
 
@@ -245,4 +256,4 @@ using Random = UnityEngine.Random;
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }
-
+}
