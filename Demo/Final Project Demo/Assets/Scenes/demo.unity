@@ -311,6 +311,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149986846}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &171966237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7145859217117219999, guid: e63a82ef04e274b4787d33402da5344c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777717796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &173503407
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +453,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226961699}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &231522689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7145859215765997671, guid: e63a82ef04e274b4787d33402da5344c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777717796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &296686772
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,8 +995,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793895909}
-  m_LocalRotation: {x: -0.06196506, y: 0.9310221, z: 0.18824421, w: 0.30646747}
-  m_LocalPosition: {x: -31.120308, y: 15.803085, z: 46.80272}
+  m_LocalRotation: {x: -0.24775776, y: 0.7071343, z: 0.29564428, w: 0.5925975}
+  m_LocalPosition: {x: -198.82451, y: -166.92139, z: 36.798332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2566,6 +2578,7 @@ GameObject:
   - component: {fileID: 1529010169}
   - component: {fileID: 1529010168}
   - component: {fileID: 1529010167}
+  - component: {fileID: 1529010170}
   m_Layer: 0
   m_Name: Terrain (1)
   m_TagString: Hookable
@@ -2634,6 +2647,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1529010170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529010166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba45972cdf7f384bbb1082869bc08bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartDay: 0
+  StarDome: {fileID: 1903102433}
+  moonState: {fileID: 231522689}
+  moon: {fileID: 171966237}
+  dawnColors:
+    skyColor: {r: 0, g: 0, b: 0, a: 0}
+    equatorColor: {r: 0, g: 0, b: 0, a: 0}
+    horizonColor: {r: 0, g: 0, b: 0, a: 0}
+  dayColors:
+    skyColor: {r: 0, g: 0, b: 0, a: 0}
+    equatorColor: {r: 0, g: 0, b: 0, a: 0}
+    horizonColor: {r: 0, g: 0, b: 0, a: 0}
+  nightColors:
+    skyColor: {r: 0, g: 0, b: 0, a: 0}
+    equatorColor: {r: 0, g: 0, b: 0, a: 0}
+    horizonColor: {r: 0, g: 0, b: 0, a: 0}
+  currentDay: 0
+  directionalLight: {fileID: 2079135347}
+  SecondsInAFullDay: 180
+  currentTime: 0
+  timeMultiplier: 1
+  showUI: 0
 --- !u!1 &1551974644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2978,6 +3025,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812407346}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1903102433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7145859216463352303, guid: e63a82ef04e274b4787d33402da5344c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777717796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1955555432
 GameObject:
   m_ObjectHideFlags: 0
