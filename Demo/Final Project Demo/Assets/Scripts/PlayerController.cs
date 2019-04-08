@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 
 	public float speed;
+	public float maxSpeed;
 
 	public float jumpPower;
     private bool grounded;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool nearShop = false;
 
-    public GameObject camera;
+    public GameObject cameraman;
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
 
@@ -43,28 +44,33 @@ public class PlayerController : MonoBehaviour
     	float moveHorizontal = Input.GetAxis("Horizontal");
     	float moveVertical = Input.GetAxis("Vertical");
 
-    	Vector3 movement =  camera.transform.rotation * new Vector3 (moveHorizontal, 0.0f, moveVertical);
+    	Vector3 movement =  GetComponent<Camera>().transform.rotation * new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
     	rb.AddForce(movement * speed);
 
 
-        costume.transform.position = Vector3.Lerp(costume.transform.position, transform.position, costumeSwingFactor);
+      costume.transform.position = Vector3.Lerp(costume.transform.position, transform.position, costumeSwingFactor);
 
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Debug.Log("space");
-            if (grounded) {
-                grounded = false;
-                rb.AddForce(Vector3.up * jumpPower);
-                Debug.Log("jump!");
-            }
-        }
+      if (Input.GetKeyDown(KeyCode.Space)) {
+          Debug.Log("space");
+          if (grounded) {
+              grounded = false;
+              rb.AddForce(Vector3.up * jumpPower);
+              Debug.Log("jump!");
+          }
+      }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("spawn turret!");
-            Object.Instantiate(turretPrefab, transform.position + camera.transform.rotation * Vector3.forward * 2f, camera.transform.rotation);
-        }
+      if (Input.GetKeyDown(KeyCode.F))
+      {
+          Debug.Log("spawn turret!");
+          Object.Instantiate(turretPrefab, transform.position + GetComponent<Camera>().transform.rotation * Vector3.forward * 2f, GetComponent<Camera>().transform.rotation);
+      }
+
+			if(GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
+			{
+		      GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
+			}
     }
 
     private void OnCollisionStay(Collision collision)
