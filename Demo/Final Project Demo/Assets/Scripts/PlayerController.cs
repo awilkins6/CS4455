@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 	private float nextFire;
 	public float turnSpeed = 0.25f;
 
+	private bool nearShop = false;
+
     public GameObject camera;
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
@@ -68,6 +70,16 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         grounded = true;
+    }
+
+    public void closeToShop()
+    {
+        nearShop = true;
+    }
+
+    public void notCloseToShop()
+    {
+        nearShop = false;
     }
 
     // void updateShoot() {
