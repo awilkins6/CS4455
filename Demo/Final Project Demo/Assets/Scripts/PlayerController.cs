@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 
 	public float speed;
+    public float maxSpeed;
 
-	public float jumpPower;
+    public float jumpPower;
     private bool grounded;
 
 	public GameObject bullet;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool nearShop = false;
 
-    public GameObject camera;
+    public GameObject cameraman;
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     	float moveHorizontal = Input.GetAxis("Horizontal");
     	float moveVertical = Input.GetAxis("Vertical");
 
-    	Vector3 movement =  camera.transform.rotation * new Vector3 (moveHorizontal, 0.0f, moveVertical);
+    	Vector3 movement =  cameraman.transform.rotation * new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
     	rb.AddForce(movement * speed);
 
@@ -63,8 +64,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("spawn turret!");
-            Object.Instantiate(turretPrefab, transform.position + camera.transform.rotation * Vector3.forward * 2f, camera.transform.rotation);
+            Object.Instantiate(turretPrefab, transform.position + GetComponent<Camera>().transform.rotation * Vector3.forward * 2f, GetComponent<Camera>().transform.rotation);
         }
+
+        //if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
+        //{
+        //    GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
+        //}
     }
 
     private void OnCollisionStay(Collision collision)

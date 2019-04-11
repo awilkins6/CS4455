@@ -29,7 +29,7 @@ public class GrappleController : MonoBehaviour
 
         if (fired == true && hooked == false)
         {
-            hook.transform.Translate(Vector3.forward * Time.deltaTime * hookTravelSpeed);
+            hook.transform.Translate(-Vector3.forward * Time.deltaTime * hookTravelSpeed);
             currentDistance = Vector3.Distance(transform.position, hook.transform.position);
 
             if (currentDistance >= maxDistance)

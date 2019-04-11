@@ -8,22 +8,27 @@ public class CameraController : MonoBehaviour
 
 	[SerializeField]
 	private Vector3 offset;
-    public float turnSpeed = 0.25f;
+    public float speedH = 2.0f;
+    public float speedV = 2.0f;
+
+    private float yaw = 0.0f;
+    private float pitch = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
+        yaw += speedH * Input.GetAxis("Mouse X");
+        pitch -= speedV * Input.GetAxis("Mouse Y");
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
+        pitch = Mathf.Clamp(pitch, -60, 60);
 
-        transform.rotation = Quaternion.EulerAngles(0, turnSpeed*moveHorizontal, 0) * transform.rotation;
-
+        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         transform.position = player.transform.position + offset;
-
+        
     }
 }
