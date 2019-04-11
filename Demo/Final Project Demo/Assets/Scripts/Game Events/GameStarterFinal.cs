@@ -11,7 +11,7 @@ public class GameStarterFinal : MonoBehaviour
 	CanvasGroup winMenuCanvas;
 
     public void StartGame() {
-        SceneManager.LoadScene("Playtest_Scene_Perry");
+        SceneManager.LoadScene("MAIN game");
         Time.timeScale = 1f;
 
         CockpitTextScript.found = false;

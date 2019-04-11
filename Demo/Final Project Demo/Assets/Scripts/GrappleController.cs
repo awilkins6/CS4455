@@ -21,10 +21,17 @@ public class GrappleController : MonoBehaviour
     void Update()
     {
         //firing hook by left clicking mouse
-        if (Input.GetMouseButton(0) && fired == false)
+        if (Input.GetMouseButton(0))
         {
-            fired = true;
-
+            if (fired) {
+              fired = false;
+              hooked = false;
+              hookedObject = null;
+            } else {
+              fired = true;
+              hooked = false;
+              hookedObject = null;
+            }
         }
 
         if (fired == true && hooked == false)
@@ -64,5 +71,10 @@ public class GrappleController : MonoBehaviour
         hook.transform.position = hookHolder.transform.position;
         fired = false;
         hooked = false;
+    }
+
+    void Hook(GameObject obj) {
+        hooked = true;
+        hookedObject = obj;
     }
 }

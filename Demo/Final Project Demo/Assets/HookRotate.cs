@@ -15,21 +15,21 @@ public class HookRotate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
 
-        yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
+        // yaw += speedH * Input.GetAxis("Mouse X");
+        // pitch -= speedV * Input.GetAxis("Mouse Y");
+        //
+        // pitch = Mathf.Clamp(pitch, -60, 60);
+        //
+        // transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        //
 
-        pitch = Mathf.Clamp(pitch, -60, 60);
 
-        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-
-
-        
     }
 }
