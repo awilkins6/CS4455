@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Hook
   - Hookable
-  - Ship
-  - Alien
   layers:
   - Default
   - TransparentFX

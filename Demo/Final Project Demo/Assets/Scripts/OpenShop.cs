@@ -44,6 +44,7 @@ public class OpenShop : MonoBehaviour
                 shop.blocksRaycasts = false;
                 shop.alpha = 0f;
                 Time.timeScale = 1f;
+                CurrencyScript.noMoney = false;
             }
             else
             {
@@ -51,6 +52,7 @@ public class OpenShop : MonoBehaviour
                 shop.blocksRaycasts = true;
                 shop.alpha = 1f;
                 Time.timeScale = 0f;
+
             }
         }
 

@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Game_Menu.unity
+    guid: 7277f0b82277b2749a7616bf58a29317
+  - enabled: 0
     path: Assets/Scenes/demo.unity
     guid: 47a51fd92e922204bae534d4092b9655
   - enabled: 1
-    path: Assets/Scenes/demo_with_stateMachine.unity
-    guid: adbf30b99d55ec240814aca55585ba34
-  - enabled: 1
-    path: Assets/Scenes/demoLoseScreen.unity
-    guid: 88b1442b5ea87304f93a5df795f98e18
+    path: Assets/Scenes/Playtest_Scene_Perry.unity
+    guid: a3fb035bc6c88db4c96ef99a6e24de2b
   m_configObjects: {}
