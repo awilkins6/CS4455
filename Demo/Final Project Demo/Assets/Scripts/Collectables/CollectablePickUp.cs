@@ -10,14 +10,15 @@ public class CollectablePickUp : MonoBehaviour
 
     // When collider is triggered, remove parent game object from game
     void OnTriggerEnter(Collider c) {
-        if (c.CompareTag("Player"))
-        this.transform.parent.gameObject.SetActive(false);
+        if (c.CompareTag("Player")) {
+	        this.transform.parent.gameObject.SetActive(false);
 
-        // Increment the number of points collected
-        if (first) {
-        	CurrencyScript.currency += 1;
-        }
+	        // Increment the number of points collected
+	        if (first) {
+	        	CurrencyScript.currency += 1;
+	        }
 
-        first = false;
+	        first = false;
+				}
     }
 }

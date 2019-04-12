@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cameraman;
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
+		private GameObject camera;
 
     [SerializeField]
     public Transform turretPrefab;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
     	rb = GetComponent<Rigidbody>();
+			camera = GameObject.FindWithTag("MainCamera");
     }
 
     void update() {
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
     		Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
     	}
     }
+
+		Quaternion turretRot = Quaternion.identity;
 
     void FixedUpdate() {
     	float moveHorizontal = Input.GetAxis("Horizontal");
@@ -61,16 +65,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("spawn turret!");
-            Object.Instantiate(turretPrefab, transform.position + GetComponent<Camera>().transform.rotation * Vector3.forward * 2f, GetComponent<Camera>().transform.rotation);
+						turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
+            Object.Instantiate(turretPrefab, transform.position + camera.transform.rotation * Vector3.forward * 2f, turretRot);
         }
 
-        //if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
-        //{
-        //    GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
-        //}
+        if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
+        {
+           GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
+        }
     }
 
     private void OnCollisionStay(Collision collision)

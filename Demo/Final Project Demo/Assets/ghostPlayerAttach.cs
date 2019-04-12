@@ -18,6 +18,5 @@ public class ghostPlayerAttach : MonoBehaviour
     {
         transform.position = target.transform.position; //follow player
         transform.rotation = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
-        Debug.Log(camera.transform.rotation.eulerAngles.y);
     }
 }

@@ -23,9 +23,9 @@ public class ShipHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(shipHealth);
+        // Debug.Log(shipHealth);
         pb.BarValue = shipHealth;
-        Debug.Log(pb.BarValue);
+        // Debug.Log(pb.BarValue);
     }
 
     void OnCollisionEnter(Collision c) {

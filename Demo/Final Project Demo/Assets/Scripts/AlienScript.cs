@@ -25,6 +25,10 @@ public class AlienScript : MonoBehaviour
     public GameObject cursor;
     public GameObject ship;
 
+    public float health = 100f;
+
+    private Rigidbody rb;
+
 
     void Start()
     {
@@ -32,11 +36,13 @@ public class AlienScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         aiState = AIState.SeekingShip;
         ship = GameObject.FindGameObjectWithTag("Ship");
+        rb = GetComponent<Rigidbody>();
     }
-    public float dist;
-    public float lookAheadTime;
-    public Vector3 targetVel;
-    public Vector3 targetPos;
+
+    // public float dist;
+    // public float lookAheadTime;
+    // public Vector3 targetVel;
+    // public Vector3 targetPos;
 
 
     // Update is called once per frame
@@ -77,6 +83,7 @@ public class AlienScript : MonoBehaviour
     {
         if (aiState != AIState.AttackingShip)
         {
+            rb.Sleep();
             Debug.Log("Found Ship");
             agent.SetDestination(transform.position);
             agent.Stop();

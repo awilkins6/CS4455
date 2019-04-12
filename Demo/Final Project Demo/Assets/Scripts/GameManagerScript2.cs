@@ -21,8 +21,8 @@ public GameObject NightLight;
     List<GameObject> nightLights = new List<GameObject>();
     void Start()
     {
-        dayState =  GameObject.Find("Terrain1").GetComponent<DayAndNightControl>().dayState;
-        gameState = GameState.GAME;
+				gameState = GameState.GAME;
+        dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
         shipHealth = GameObject.Find("Ship1").transform.GetChild(0).GetComponent<ShipHealth>().shipHealth;
         Debug.Log("game manager started");
         foreach (Transform child in GameObject.Find("Aliens").transform) {

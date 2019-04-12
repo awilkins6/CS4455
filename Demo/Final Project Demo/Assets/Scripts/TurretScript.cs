@@ -22,16 +22,29 @@ public class TurretScript : MonoBehaviour
         aiState = AIState.Idle;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-
+      if (target) {
+        head.transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.transform.position-transform.position).eulerAngles.y, 0);
+      }
     }
 
     private void OnTriggerStay(Collider other)
     {
-      if (other.GetComponent<AlienScript>() != null) {
-        head.transform.LookAt(other.transform.position);
+      if (!target) {
+        if (other.gameObject.GetComponent<AlienScript>()) {
+          target = other.gameObject;
+        }
+      }
+    }
+
+    private void OnTriggerLeave(Collider other)
+    {
+      if (target == other) {
+        target = null;
       }
     }
 }

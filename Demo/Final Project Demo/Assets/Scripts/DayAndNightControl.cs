@@ -21,7 +21,7 @@ public class DayAndNightControl : MonoBehaviour {
 	public DayColors nightColors;
 	public int currentDay = 0; //day 8287... still stuck in this grass prison... no esacape... no freedom...
 	public Light directionalLight; //the directional light in the scene we're going to work with
-	public float SecondsInAFullDay; 
+	public float SecondsInAFullDay;
 	//in realtime, this is about two minutes by default. (every 1 minute/60 seconds is day in game)
 	//[Range(0,1)]
 	public float currentTime = 0; //at default when you press play, it will be nightTime. (0 = night, 1 = day)
@@ -29,7 +29,7 @@ public class DayAndNightControl : MonoBehaviour {
 	public float timeMultiplier = 1f; //how fast the day goes by regardless of the secondsInAFullDay var. lower values will make the days go by longer, while higher values make it go faster. This may be useful if you're siumulating seasons where daylight and night times are altered.
 	public bool showUI;
 	float lightIntensity; //static variable to see what the current light's insensity is in the inspector
-	Material starMat;
+	public Material starMat;
 
 	public string dayState;
 
@@ -44,13 +44,13 @@ public class DayAndNightControl : MonoBehaviour {
 			}
 		}
 		lightIntensity = directionalLight.intensity; //what's the current intensity of the light
-		starMat = StarDome.GetComponentInChildren<MeshRenderer> ().material;
+		// starMat = StarDome.GetComponentInChildren<MeshRenderer>().material;
 		if (StartDay) {
 			currentTime = 0.3f; //start at morning
 			starMat.color = new Color(1f,1f,1f,0f);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		TimeOfDay();
@@ -75,17 +75,17 @@ public class DayAndNightControl : MonoBehaviour {
 
 		float intensityMultiplier = 1;
 
-		if (currentTime <= 0.23f || currentTime >= 0.75f) 
+		if (currentTime <= 0.23f || currentTime >= 0.75f)
 		{
 			intensityMultiplier = 0f; //when the sun is below the horizon, or setting, the intensity needs to be 0 or else it'll look weird
 			starMat.color = new Color(1,1,1,Mathf.Lerp(1,0,Time.deltaTime));
 		}
-		else if (currentTime <= 0.25f) 
+		else if (currentTime <= 0.25f)
 		{
 			intensityMultiplier = Mathf.Clamp01((currentTime - 0.23f) * (1 / 0.02f));
 			starMat.color = new Color(1,1,1,Mathf.Lerp(0,1,Time.deltaTime));
 		}
-		else if (currentTime <= 0.73f) 
+		else if (currentTime <= 0.73f)
 		{
 			intensityMultiplier = Mathf.Clamp01(1 - ((currentTime - 0.73f) * (1 / 0.02f)));
 		}

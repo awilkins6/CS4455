@@ -27,6 +27,7 @@ public class CockpitTextScript : MonoBehaviour
     }
 
     public static void setToFound() {
+				Debug.Log("Set To Found");
         found = true;
     }
 
