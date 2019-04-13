@@ -24,8 +24,13 @@ public class AlienScript : MonoBehaviour
     public float t = 0f;
     public GameObject cursor;
     public GameObject ship;
+    public ShipHealth shipHealth;
+    public GameObject healthBar;
+    public GameObject progressBar;
+    public GameObject camera;
 
     public float health = 100f;
+    public float hitFactor = 10f;
 
     private Rigidbody rb;
 
@@ -36,7 +41,9 @@ public class AlienScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         aiState = AIState.SeekingShip;
         ship = GameObject.FindGameObjectWithTag("Ship");
+        shipHealth = ship.GetComponent<ShipHealth>();
         rb = GetComponent<Rigidbody>();
+        camera = GameObject.FindWithTag("MainCamera");
     }
 
     // public float dist;
@@ -66,17 +73,28 @@ public class AlienScript : MonoBehaviour
                 }
                 break;
             case AIState.AttackingShip:
+                shipHealth.doDamage(2f*Time.deltaTime);
+                rb.isKinematic = true;
                 //Debug.Log("do nothing");
                 break;
         }
+        healthBar.transform.LookAt(camera.transform);
+        progressBar.GetComponent<ProgressBar>().BarValue = health;
     }
 
     void OnCollisionEnter(Collision c) {
         Debug.Log(c);
         Debug.Log(c.gameObject.name);
         if (c.gameObject == ship) {
-            foundShip();
+          foundShip();
         }
+        if (c.gameObject.tag == "Player") {
+          health -= c.impulse.magnitude * hitFactor;
+        }
+    }
+
+    public void doDamage(float damage) {
+      health -= damage;
     }
 
     public void foundShip()
@@ -90,5 +108,9 @@ public class AlienScript : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             aiState = AIState.AttackingShip;
         }
+    }
+
+    public void Die() {
+      gameObject.destroy();
     }
 }

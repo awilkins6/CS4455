@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
 		Quaternion turretRot = Quaternion.identity;
 
+		Ray ray;
+		RaycastHit hit;
+
     void FixedUpdate() {
     	float moveHorizontal = Input.GetAxis("Horizontal");
     	float moveVertical = Input.GetAxis("Vertical");
@@ -57,19 +60,22 @@ public class PlayerController : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Debug.Log("space");
+            // Debug.Log("space");
             if (grounded) {
                 grounded = false;
                 rb.AddForce(Vector3.up * jumpPower);
-                Debug.Log("jump!");
+                // Debug.Log("jump!");
             }
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log("spawn turret!");
-						turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
-            Object.Instantiate(turretPrefab, transform.position + camera.transform.rotation * Vector3.forward * 2f, turretRot);
+            // Debug.Log("spawn turret!");
+						ray = new Ray(transform.position + camera.transform.forward * 2f, -1 * Vector3.up);
+						if (Physics.Raycast(ray, out hit)) {
+							turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
+	            Object.Instantiate(turretPrefab, hit.point + 0.5f * Vector3.up, turretRot);
+						}
         }
 
         if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)

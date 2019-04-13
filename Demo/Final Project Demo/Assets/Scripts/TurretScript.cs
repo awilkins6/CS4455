@@ -15,6 +15,7 @@ public class TurretScript : MonoBehaviour
     public GameObject target;
 
     public GameObject head;
+    public float alienDamage = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,8 @@ public class TurretScript : MonoBehaviour
         if (other.gameObject.GetComponent<AlienScript>()) {
           target = other.gameObject;
         }
+      } else {
+        target.GetComponent<AlienScript>().doDamage(alienDamage*Time.deltaTime);
       }
     }
 

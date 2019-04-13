@@ -28,16 +28,19 @@ public class ShipHealth : MonoBehaviour
         // Debug.Log(pb.BarValue);
     }
 
-    void OnCollisionEnter(Collision c) {
-    	if(c.gameObject.tag == "Alien") {
-            shipHealth -= alienDamage;
-            Debug.Log("alien contact");
-        }
-
-        //debug test to see if one alien touches based on name
-        // if(c.gameObject.name == "Alien") {
-        //     shipHealth -= alienDamage;
-        //     Debug.Log("one alien contact");
-        // }
+    // void OnCollisionEnter(Collision c) {
+    // 	if(c.gameObject.tag == "Alien") {
+    //         shipHealth -= alienDamage * Time.deltaTime;
+    //         Debug.Log("alien contact");
+    //     }
+    //
+    //     //debug test to see if one alien touches based on name
+    //     // if(c.gameObject.name == "Alien") {
+    //     //     shipHealth -= alienDamage;
+    //     //     Debug.Log("one alien contact");
+    //     // }
+    // }
+    public void doDamage(float damage) {
+      shipHealth -= damage;
     }
 }
