@@ -42,6 +42,6 @@ public class ShipHealth : MonoBehaviour
     // }
     public void doDamage(float damage) {
       shipHealth -= damage;
-      shipHealth = Mathf.Clamp01(shipHealth);
+      shipHealth = Mathf.Clamp(shipHealth, 0, 100f);
     }
 }
