@@ -125,8 +125,10 @@
     <Compile Include="Assets\Scripts\Collectables\CockpitPickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\CollectablePickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\CollectableProximity.cs" />
+    <Compile Include="Assets\Scripts\Collectables\PartPickUpScript.cs" />
     <Compile Include="Assets\Scripts\Collectables\SatellitePickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\WrenchPickUp.cs" />
+    <Compile Include="Assets\Scripts\CurrencyScript.cs" />
     <Compile Include="Assets\Scripts\DayAndNightControl.cs" />
     <Compile Include="Assets\Scripts\DayAndNightControlLight.cs" />
     <Compile Include="Assets\Scripts\DayAndNightLights.cs" />
@@ -138,9 +140,9 @@
     <Compile Include="Assets\Scripts\Game Events\SceneStart.cs" />
     <Compile Include="Assets\Scripts\Game Events\StartMenuScript.cs" />
     <Compile Include="Assets\Scripts\Game Events\WinMenuToggle.cs" />
-    <Compile Include="Assets\Scripts\GameManagerScript.cs" />
     <Compile Include="Assets\Scripts\GameManagerScript2.cs" />
     <Compile Include="Assets\Scripts\GrappleController.cs" />
+    <Compile Include="Assets\Scripts\HiveScript.cs" />
     <Compile Include="Assets\Scripts\HookDetector.cs" />
     <Compile Include="Assets\Scripts\OpenShop.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -148,7 +150,6 @@
     <Compile Include="Assets\Scripts\ShipMarkerScript.cs" />
     <Compile Include="Assets\Scripts\TurretScript.cs" />
     <Compile Include="Assets\Scripts\UI\CockpitTextScript.cs" />
-    <Compile Include="Assets\Scripts\UI\CurrencyScript.cs" />
     <Compile Include="Assets\Scripts\UI\SatelliteTextScript.cs" />
     <Compile Include="Assets\Scripts\UI\UICountdownScript.cs" />
     <Compile Include="Assets\Scripts\UI\WrenchTextScript.cs" />
@@ -212,17 +213,17 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.3.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -427,15 +428,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>/Applications/Unity/Hub/Editor/2018.3.2f1/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity/Hub/Editor/2018.3.2f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -46,7 +46,7 @@ public class GrappleController : MonoBehaviour
             // fired = true;
             // timer = maxTime;
             if (Physics.Raycast(ray, out hit)) {
-                Debug.Log("hit!!");
+                // Debug.Log("hit!!");
                 fired = true;
                 dir = (hit.point - hook.transform.position).normalized;
                 Debug.DrawRay(hook.transform.position, hit.point - hook.transform.position, Color.green, 10f);
@@ -86,6 +86,7 @@ public class GrappleController : MonoBehaviour
           }
         } else {
           hook.transform.parent = hookHolder.transform;
+          hook.transform.position = hookHolder.transform.position;
         }
     }
 

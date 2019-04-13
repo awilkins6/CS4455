@@ -17,7 +17,7 @@ public class ShipHealth : MonoBehaviour
    // 			aliens.Add(child.gameObject);
  		// }
  		startingShipHealth = shipHealth;
- 		pb.BarValue = shipHealth/startingShipHealth;
+ 		pb.BarValue = shipHealth;
     }
 
     // Update is called once per frame
@@ -42,5 +42,6 @@ public class ShipHealth : MonoBehaviour
     // }
     public void doDamage(float damage) {
       shipHealth -= damage;
+      shipHealth = Mathf.Clamp01(shipHealth);
     }
 }

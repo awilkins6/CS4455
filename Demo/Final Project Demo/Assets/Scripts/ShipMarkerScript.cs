@@ -22,7 +22,7 @@ public class ShipMarkerScript : MonoBehaviour
         AlienScript x = other.gameObject.GetComponent<AlienScript>();
         if (x)
         {
-            Debug.Log("Ship hit a alien!");
+            // Debug.Log("Ship hit a alien!");
             x.foundShip();
         }
     }

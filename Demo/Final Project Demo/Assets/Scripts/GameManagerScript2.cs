@@ -1,98 +1,111 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript2 : MonoBehaviour
 {
-public GameObject NightLight;
-	enum GameState{
-		START,
-		GAME,
-		PAUSE,
-		WIN,
-		LOSE
-	};
-	GameState gameState;
-	float shipHealth;
-	GameObject ship;
+    public GameObject nightLight;
+    enum GameState{
+    	START,
+    	GAME,
+    	PAUSE,
+    	WIN,
+    	LOSE
+    };
+    	GameState gameState;
+    	ShipHealth shipHealth;
+    	GameObject ship;
     // Start is called before the first frame update
     string dayState;
-    List<GameObject> aliens = new List<GameObject>();
-    List<GameObject> nightLights = new List<GameObject>();
+    public GameObject alienHive;
+    public GameObject playerStart;
+    public GameObject player;
+    bool spawnedAliensToday = true;
+
+    public GameObject[] shipParts;
+    public GameObject[] shipLabels;
+    int foundParts = 0;
+
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
     void Start()
     {
-				gameState = GameState.GAME;
-        dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
-        shipHealth = GameObject.Find("Ship1").transform.GetChild(0).GetComponent<ShipHealth>().shipHealth;
-        Debug.Log("game manager started");
-        foreach (Transform child in GameObject.Find("Aliens").transform) {
-   			aliens.Add(child.gameObject);
- 		}
- 		foreach (Transform child in GameObject.Find("NightLights").transform) {
-   			nightLights.Add(child.gameObject);
- 		}
- 		foreach (GameObject l in nightLights) {
- 			l.SetActive(false);
- 		}
- 		foreach (GameObject a in aliens) {
- 			a.SetActive(false);
- 		}
- 		//GameObject.Find("NightLights").SetActive(false);
+      player = GameObject.FindWithTag("Player");
+      gameState = GameState.GAME;
+      dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
+      shipHealth = GameObject.FindWithTag("Ship").GetComponent<ShipHealth>();
+      nightLight.SetActive(false);
+      UpdateParts();
+    }
 
+    public void UpdateParts() {
+      foundParts = 0;
+      for (int i = 0; i < shipParts.Length; i++) {
+        if (shipParts[i].GetComponent<PartPickUpScript>().found) {
+          Debug.Log("found!!");
+          shipLabels[i].GetComponent<Text>().color = Color.green;
+          foundParts++;
+        } else {
+          shipLabels[i].GetComponent<Text>().color = Color.red;
+        }
+        shipLabels[i].GetComponent<Text>().text = shipParts[i].name;
+      }
+      Debug.Log("Updated parts");
+
+      if (foundParts == shipParts.Length) {
+        gameState = GameState.WIN;
+      }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    	if (nightLights != null) {
-    		Debug.Log("the night lights array has a light" + nightLights.Count);
-    	}
-    	if (aliens != null) {
-    		Debug.Log("the aliens array has an alien" + aliens.Count);
-    	}
-    	//night lights, currently not in use/working
-    	//TODO set active for night light the issue, needs fix
-    	dayState =  GameObject.Find("Terrain1").GetComponent<DayAndNightControl>().dayState;
-    	if (string.Equals(dayState, "Midnight") || string.Equals(dayState, "Night")) {
-    		Debug.Log("LET THERE BE (NIGHT) LIGHT");
-    		foreach (GameObject l in nightLights) {
- 				l.SetActive(true);
- 			}
- 			//GameObject.Find("NightLights").SetActive(true);
-    		Debug.Log("Aliens ATTACK NOWWWW");
-    		foreach (GameObject a in aliens) {
- 				a.SetActive(true);
- 			}
+    void Update() {
+      dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
+      if (string.Equals(dayState, "Midnight") || string.Equals(dayState, "Night")) {
+        // Debug.Log("LET THERE BE (NIGHT) LIGHT");
+        nightLight.SetActive(true);
+      } else {
+        nightLight.SetActive(false);
+      }
 
-    	} else {
-    		foreach (GameObject l in nightLights) {
- 				l.SetActive(false);
- 			}
- 			//GameObject.Find("NightLights").SetActive(false);
- 			foreach (GameObject a in aliens) {
- 				a.SetActive(false);
- 			}
-    	}
-    	shipHealth = GameObject.Find("Ship1").transform.GetChild(0).GetComponent<ShipHealth>().shipHealth;
-    	Debug.Log("game manager ship health" + shipHealth);
-    	Debug.Log("I am THE GAME MANAGER! I AM ALIVE");
+      switch(gameState) {
+      case GameState.START:
+      	break;
+      case GameState.GAME:
+      	if (shipHealth.shipHealth <= 0) {
+      		gameState = GameState.LOSE;
+      		//UnityEngine.SceneManagement.SceneManager.LoadScene("demoLoseScreen");
+      	}
+      	break;
+      case GameState.PAUSE:
+      	break;
+      case GameState.WIN:
+        Win();
+      	break;
+      case GameState.LOSE:
+        Lose();
+      	// UnityEngine.SceneManagement.SceneManager.LoadScene("demoLoseScreen");
+      	break;
+      }
+    }
 
-    	switch(gameState) {
-    		case GameState.START:
-    			break;
-    		case GameState.GAME:
-    			if (shipHealth <= 0) {
-    				gameState = GameState.LOSE;
-    				//UnityEngine.SceneManagement.SceneManager.LoadScene("demoLoseScreen");
-    			}
-    			break;
-    		case GameState.PAUSE:
-    			break;
-    		case GameState.WIN:
-    			break;
-    		case GameState.LOSE:
-    			UnityEngine.SceneManagement.SceneManager.LoadScene("demoLoseScreen");
-    			break;
-    	}
+    void Win() {
+      Time.timeScale = 0f;
+      winScreen.SetActive(true);
+    }
+
+    void Lose() {
+      Time.timeScale = 0f;
+      loseScreen.SetActive(true);
+    }
+
+    public void startNight() {
+      player.transform.position = playerStart.transform.position;
+    }
+
+    public void startMidnight() {
+      alienHive.GetComponent<HiveScript>().spawnAliens(GetComponent<DayAndNightControl>().currentDay);
+      spawnedAliensToday = true;
     }
 }

@@ -1,6 +1,7 @@
 ﻿//2016 Spyblood Games
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -20,7 +21,10 @@ public class DayAndNightControl : MonoBehaviour {
 	public DayColors dayColors;
 	public DayColors nightColors;
 	public int currentDay = 0; //day 8287... still stuck in this grass prison... no esacape... no freedom...
-	public Light directionalLight; //the directional light in the scene we're going to work with
+
+	public Light dayLight; //the directional light in the scene we're going to work with
+	public Light nightLight;
+
 	public float SecondsInAFullDay;
 	//in realtime, this is about two minutes by default. (every 1 minute/60 seconds is day in game)
 	//[Range(0,1)]
@@ -29,9 +33,12 @@ public class DayAndNightControl : MonoBehaviour {
 	public float timeMultiplier = 1f; //how fast the day goes by regardless of the secondsInAFullDay var. lower values will make the days go by longer, while higher values make it go faster. This may be useful if you're siumulating seasons where daylight and night times are altered.
 	public bool showUI;
 	float lightIntensity; //static variable to see what the current light's insensity is in the inspector
-	public Material starMat;
+
+  public Material nightSkybox;
+  public Material daySkybox;
 
 	public string dayState;
+  public GameObject TOD_Text;
 
 	Camera targetCam;
 
@@ -43,17 +50,15 @@ public class DayAndNightControl : MonoBehaviour {
 				targetCam = c;
 			}
 		}
-		lightIntensity = directionalLight.intensity; //what's the current intensity of the light
-		// starMat = StarDome.GetComponentInChildren<MeshRenderer>().material;
+		lightIntensity = dayLight.intensity; //what's the current intensity of the light
 		if (StartDay) {
 			currentTime = 0.3f; //start at morning
-			starMat.color = new Color(1f,1f,1f,0f);
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		TimeOfDay();
+		TOD_Text.GetComponent<Text>().text = "Time: " + TimeOfDay() + "\n" + currentTime.ToString("F");
 		UpdateLight();
 		currentTime += (Time.deltaTime / SecondsInAFullDay) * timeMultiplier;
 		if (currentTime >= 1) {
@@ -61,6 +66,8 @@ public class DayAndNightControl : MonoBehaviour {
 			currentDay++; //make the day counter go up
 		}
 	}
+
+  float intensityMultiplier = 1;
 
 	void UpdateLight()
 	{
@@ -73,91 +80,75 @@ public class DayAndNightControl : MonoBehaviour {
 
 		//the 170 is where the sun will sit on the horizon line. if it were at 180, or completely flat, it would be hard to see. Tweak this value to what you find comfortable.
 
-		float intensityMultiplier = 1;
 
-		if (currentTime <= 0.23f || currentTime >= 0.75f)
-		{
-			intensityMultiplier = 0f; //when the sun is below the horizon, or setting, the intensity needs to be 0 or else it'll look weird
-			starMat.color = new Color(1,1,1,Mathf.Lerp(1,0,Time.deltaTime));
-		}
-		else if (currentTime <= 0.25f)
-		{
-			intensityMultiplier = Mathf.Clamp01((currentTime - 0.23f) * (1 / 0.02f));
-			starMat.color = new Color(1,1,1,Mathf.Lerp(0,1,Time.deltaTime));
-		}
-		else if (currentTime <= 0.73f)
-		{
+    if (currentTime <= 0.2f) {
+      if (!dayState.Equals("Midnight")) {
+       Debug.Log(currentTime);
+       GetComponent<GameManagerScript2>().startMidnight();
+      }
+      dayState = "Midnight";
+      intensityMultiplier = 0f;
+      RenderSettings.ambientSkyColor = nightColors.skyColor;
+      RenderSettings.ambientEquatorColor = nightColors.equatorColor;
+      RenderSettings.ambientGroundColor = nightColors.horizonColor;
+    } else if (currentTime <= 0.5f) {
+      dayState = "Morning";
+  		intensityMultiplier = Mathf.Clamp01((currentTime - 0.23f) * (1 / 0.02f));
+      RenderSettings.ambientSkyColor = dawnColors.skyColor;
+      RenderSettings.ambientEquatorColor = dawnColors.equatorColor;
+      RenderSettings.ambientGroundColor = dawnColors.horizonColor;
+    } else if (currentTime <= 0.6f) {
 			intensityMultiplier = Mathf.Clamp01(1 - ((currentTime - 0.73f) * (1 / 0.02f)));
-		}
+      dayState = "Mid Noon";
+      RenderSettings.ambientSkyColor = dayColors.skyColor;
+      RenderSettings.ambientEquatorColor = dayColors.equatorColor;
+      RenderSettings.ambientGroundColor = dayColors.horizonColor;
+    } else if (currentTime <= 0.8f) {
+			intensityMultiplier = Mathf.Clamp01(1 - ((currentTime - 0.73f) * (1 / 0.02f)));
+      dayState = "Evening";
+      RenderSettings.ambientSkyColor = dayColors.skyColor;
+      RenderSettings.ambientEquatorColor = dayColors.equatorColor;
+      RenderSettings.ambientGroundColor = dayColors.horizonColor;
+    } else if (currentTime <= 1f) {
+      if (!dayState.Equals("Night")) {
+       GetComponent<GameManagerScript2>().startNight();
+      }
+      dayState = "Night";
+      RenderSettings.ambientSkyColor = nightColors.skyColor;
+      RenderSettings.ambientEquatorColor = nightColors.equatorColor;
+      RenderSettings.ambientGroundColor = nightColors.horizonColor;
+    }
 
-		if ((currentTime >= 0.75f && currentTime <= 1f) || (currentTime >= 0f && currentTime <= 0.3f)) {
-			//don't rotate directional light
+		if (currentTime >= 0.2f && currentTime <= 0.8f) {
+      RenderSettings.skybox = daySkybox;
+			dayLight.transform.localRotation = Quaternion.Euler ((currentTime * 360f) - 90, 170, 0);
+      nightLight.gameObject.SetActive(false);
+      dayLight.gameObject.SetActive(true);
 		} else {
-			directionalLight.transform.localRotation = Quaternion.Euler ((currentTime * 360f) - 90, 170, 0);
-		}
+      RenderSettings.skybox = nightSkybox;
+      nightLight.gameObject.SetActive(true);
+      dayLight.gameObject.SetActive(false);
+    }
 
-
-		//change env colors to add mood
-
-		if (currentTime <= 0.2f) {
-			RenderSettings.ambientSkyColor = nightColors.skyColor;
-			RenderSettings.ambientEquatorColor = nightColors.equatorColor;
-			RenderSettings.ambientGroundColor = nightColors.horizonColor;
-		}
-		if (currentTime > 0.2f && currentTime < 0.4f) {
-			RenderSettings.ambientSkyColor = dawnColors.skyColor;
-			RenderSettings.ambientEquatorColor = dawnColors.equatorColor;
-			RenderSettings.ambientGroundColor = dawnColors.horizonColor;
-		}
-		if (currentTime > 0.4f && currentTime < 0.75f) {
-			RenderSettings.ambientSkyColor = dayColors.skyColor;
-			RenderSettings.ambientEquatorColor = dayColors.equatorColor;
-			RenderSettings.ambientGroundColor = dayColors.horizonColor;
-		}
-		if (currentTime > 0.75f) {
-			RenderSettings.ambientSkyColor = dayColors.skyColor;
-			RenderSettings.ambientEquatorColor = dayColors.equatorColor;
-			RenderSettings.ambientGroundColor = dayColors.horizonColor;
-		}
-
-		directionalLight.intensity = lightIntensity * intensityMultiplier;
+		dayLight.intensity = lightIntensity * intensityMultiplier;
 	}
+
+  bool spawnedAliensToday = false;
 
 	public string TimeOfDay ()
 	{
-	dayState = "";
-		if (currentTime > 0f && currentTime < 0.1f) {
-			dayState = "Midnight";
-		}
-		if (currentTime < 0.5f && currentTime > 0.1f)
-		{
-			dayState = "Morning";
-
-		}
-		if (currentTime > 0.5f && currentTime < 0.6f)
-		{
-			dayState = "Mid Noon";
-		}
-		if (currentTime > 0.6f && currentTime < 0.8f)
-		{
-			dayState = "Evening";
-
-		}
-		if (currentTime > 0.8f && currentTime < 1f)
-		{
-			dayState = "Night";
-		}
+	   // dayState = "";
 		return dayState;
 	}
 
-	void OnGUI()
-	{
-		//debug GUI on screen visuals
-		if (showUI) {
-			GUILayout.Box ("Day: " + currentDay);
-			GUILayout.Box (TimeOfDay ());
-			GUILayout.Box ("Time slider");
-			GUILayout.VerticalSlider (currentTime, 0f, 1f);
-		}
-	}
+	// void OnGUI()
+	// {
+	// 	//debug GUI on screen visuals
+	// 	// if (showUI) {
+	// 	// 	GUILayout.Box ("Day: " + currentDay);
+	// 	// 	GUILayout.Box (TimeOfDay ());
+	// 	// 	GUILayout.Box ("Time slider");
+	// 	// 	GUILayout.VerticalSlider (currentTime, 0f, 1f);
+	// 	// }
+	// }
 }

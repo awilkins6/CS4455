@@ -8,35 +8,18 @@ public class OpenShop : MonoBehaviour
 {
     public CanvasGroup shop;
     public bool playerNear = false;
-
-    private void OnTriggerStay(Collider c)
-    {
-        PlayerController pc = c.attachedRigidbody.gameObject.GetComponent<PlayerController>();
-        if (c.attachedRigidbody != null)
-        {
-            playerNear = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider c)
-    {
-        PlayerController pc = c.attachedRigidbody.gameObject.GetComponent<PlayerController>();
-        if (c.attachedRigidbody != null)
-        {
-            playerNear = false;
-        }
-    }
-
+    public GameObject player;
+    private float maxDist = 20f;
     // Start is called before the first frame update
     void Start()
     {
-
+      player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E) && playerNear)
+        if (Input.GetKeyUp(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < maxDist)
         {
             if (shop.interactable)
             {

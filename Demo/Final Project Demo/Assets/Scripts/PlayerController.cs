@@ -6,20 +6,20 @@ public class PlayerController : MonoBehaviour
 {
 	private Rigidbody rb;
 
-	public float speed;
+	  public float speed;
     public float maxSpeed;
 
     public float jumpPower;
     private bool grounded;
 
-	public GameObject bullet;
-	public Transform bulletSpawn;
+  	public GameObject bullet;
+  	public Transform bulletSpawn;
 
-	public float fireRate;
-	private float nextFire;
-	public float turnSpeed = 0.25f;
+  	public float fireRate;
+  	private float nextFire;
+  	public float turnSpeed = 0.25f;
 
-	private bool nearShop = false;
+  	private bool nearShop = false;
 
     public GameObject cameraman;
     public GameObject costume;
@@ -71,10 +71,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             // Debug.Log("spawn turret!");
-						ray = new Ray(transform.position + camera.transform.forward * 2f, -1 * Vector3.up);
+						turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
+						ray = new Ray(transform.position + turretRot * Vector3.forward * 2f, -1 * Vector3.up);
 						if (Physics.Raycast(ray, out hit)) {
-							turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
-	            Object.Instantiate(turretPrefab, hit.point + 0.5f * Vector3.up, turretRot);
+							if (hit.transform.gameObject.name == "Terrain") {
+								if (CurrencyScript.buyTurret()) {
+		            	Object.Instantiate(turretPrefab, hit.point + 0.5f * Vector3.up, turretRot);
+								}
+							}
 						}
         }
 
@@ -84,9 +88,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        grounded = true;
+			foreach (ContactPoint contact in collision.contacts) {
+				if (contact.point.y < transform.position.y) {
+	        grounded = true;
+				}
+      }
     }
 
     public void closeToShop()

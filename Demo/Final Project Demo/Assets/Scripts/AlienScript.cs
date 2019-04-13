@@ -83,8 +83,8 @@ public class AlienScript : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision c) {
-        Debug.Log(c);
-        Debug.Log(c.gameObject.name);
+        // Debug.Log(c);
+        // Debug.Log(c.gameObject.name);
         if (c.gameObject == ship) {
           foundShip();
         }
@@ -95,6 +95,9 @@ public class AlienScript : MonoBehaviour
 
     public void doDamage(float damage) {
       health -= damage;
+      if (health <= 0f) {
+        Die();
+      }
     }
 
     public void foundShip()
@@ -102,7 +105,7 @@ public class AlienScript : MonoBehaviour
         if (aiState != AIState.AttackingShip)
         {
             rb.Sleep();
-            Debug.Log("Found Ship");
+            // Debug.Log("Found Ship");
             agent.SetDestination(transform.position);
             agent.Stop();
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -111,6 +114,6 @@ public class AlienScript : MonoBehaviour
     }
 
     public void Die() {
-      gameObject.destroy();
+      Destroy(gameObject);
     }
 }
