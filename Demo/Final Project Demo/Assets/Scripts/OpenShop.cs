@@ -9,7 +9,7 @@ public class OpenShop : MonoBehaviour
     public CanvasGroup shop;
     public bool playerNear = false;
     public GameObject player;
-    private float maxDist = 20f;
+    private float maxDist = 10f;
     // Start is called before the first frame update
     void Start()
     {
