@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\Collectables\CollectablePickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\CollectableProximity.cs" />
     <Compile Include="Assets\Scripts\Collectables\PartPickUpScript.cs" />
+    <Compile Include="Assets\Scripts\Collectables\PartProximity.cs" />
     <Compile Include="Assets\Scripts\Collectables\SatellitePickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\WrenchPickUp.cs" />
     <Compile Include="Assets\Scripts\CurrencyScript.cs" />

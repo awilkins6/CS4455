@@ -5,6 +5,18 @@ using UnityEngine.UI;
 
 public class GameManagerScript2 : MonoBehaviour
 {
+
+    public AudioSource gameMusic;
+    public AudioSource winMusic;
+    public AudioSource moneySound;
+    public AudioSource partSound;
+    public AudioSource buySound;
+
+
+    public static bool money;
+    public static bool part;
+    public static bool buy;
+
     public GameObject nightLight;
     enum GameState{
     	START,
@@ -13,8 +25,9 @@ public class GameManagerScript2 : MonoBehaviour
     	WIN,
     	LOSE
     };
-    	GameState gameState;
-    	ShipHealth shipHealth;
+    GameState gameState;
+    	
+      ShipHealth shipHealth;
     	GameObject ship;
     // Start is called before the first frame update
     string dayState;
@@ -30,8 +43,16 @@ public class GameManagerScript2 : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+    void Awake() {
+      gameMusic.loop = true;
+      gameMusic.Play();
+      money = false;
+      part = false;
+    }
+
     void Start()
     {
+
       player = GameObject.FindWithTag("Player");
       gameState = GameState.GAME;
       dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
@@ -45,17 +66,22 @@ public class GameManagerScript2 : MonoBehaviour
       for (int i = 0; i < shipParts.Length; i++) {
         if (shipParts[i].GetComponent<PartPickUpScript>().found) {
           Debug.Log("found!!");
+          shipLabels[i].GetComponent<Text>().enabled = true;
           shipLabels[i].GetComponent<Text>().color = Color.green;
           foundParts++;
         } else {
-          shipLabels[i].GetComponent<Text>().color = Color.red;
+          shipLabels[i].GetComponent<Text>().enabled = false;
         }
-        shipLabels[i].GetComponent<Text>().text = shipParts[i].name;
+        shipLabels[i].GetComponent<Text>().text = "X";
       }
       Debug.Log("Updated parts");
 
       if (foundParts == shipParts.Length) {
+        winMusic.Play();
         gameState = GameState.WIN;
+      } else if (part) {
+        partSound.Play();
+        part = false;
       }
     }
 
@@ -81,13 +107,34 @@ public class GameManagerScript2 : MonoBehaviour
       case GameState.PAUSE:
       	break;
       case GameState.WIN:
+        gameMusic.Stop();
         Win();
       	break;
       case GameState.LOSE:
+        gameMusic.Stop();
         Lose();
       	// UnityEngine.SceneManagement.SceneManager.LoadScene("demoLoseScreen");
       	break;
       }
+
+      if (money) {
+        moneySound.Play();
+        money = false;
+      }
+
+      if (buy) {
+        buySound.Play();
+        buy = false;
+      }
+
+      if (Input.GetKeyUp (KeyCode.Escape)) {
+        if (gameMusic.isPlaying) {
+          gameMusic.Pause();
+        } else {
+          gameMusic.UnPause();
+        }
+      }
+
     }
 
     void Win() {
@@ -107,5 +154,17 @@ public class GameManagerScript2 : MonoBehaviour
     public void startMidnight() {
       alienHive.GetComponent<HiveScript>().spawnAliens(GetComponent<DayAndNightControl>().currentDay);
       spawnedAliensToday = true;
+    }
+    
+    public static void toggleMoney() {
+      money = true;
+    }
+
+    public static void togglePart() {
+      part = true;
+    }
+
+    public static void toggleBuy() {
+      buy = true;
     }
 }

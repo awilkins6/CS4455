@@ -27,7 +27,7 @@ public class CurrencyScript : MonoBehaviour
     void Update()
     {
         if (currencyText) {
-            currencyText.text = "Moon Stones: " + currency.ToString();
+            currencyText.text = ": " + currency.ToString();
         }
     }
 
@@ -45,6 +45,7 @@ public class CurrencyScript : MonoBehaviour
         }
 
         if ((currency - cost) >= 0) {
+            GameManagerScript2.toggleBuy();
             currency -= cost;
             if (currency == 0) {
               noMoney = true;
@@ -63,6 +64,7 @@ public class CurrencyScript : MonoBehaviour
                 Debug.Log("nothing purchased");
                 break;
             }
+            
 
         } else {
             noMoney = true;

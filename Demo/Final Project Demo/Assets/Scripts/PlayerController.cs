@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 	  public float speed;
     public float maxSpeed;
 
+    public AudioSource jumpSound;
+
     public float jumpPower;
     private bool grounded;
 
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour
             if (grounded) {
                 grounded = false;
                 rb.AddForce(Vector3.up * jumpPower);
+                jumpSound.Play();
                 // Debug.Log("jump!");
             }
         }
