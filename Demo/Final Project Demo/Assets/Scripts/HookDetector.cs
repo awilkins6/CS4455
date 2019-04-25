@@ -6,13 +6,11 @@ public class HookDetector : MonoBehaviour
 {
 
     public GameObject player;
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision c)
     {
-        if (other.tag == "Hookable")
-        {
-            // player.GetComponent<GrappleController>().hooked = true;
-            // player.GetComponent<GrappleController>().hookedObject = other.gameObject;
-            player.GetComponent<GrappleController>().Hook(other.gameObject);
-        }
+        ContactPoint contact = c.contacts[0];
+        player.GetComponent<GrappleController>().Hook(c.gameObject);
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.position = contact.point;
     }
 }
