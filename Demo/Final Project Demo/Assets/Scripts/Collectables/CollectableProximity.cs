@@ -20,18 +20,26 @@ public class CollectableProximity : MonoBehaviour
         anim.speed = 0;
     }
 
-    // When collider is triggered, set animation speed to 1
-    void OnTriggerEnter(Collider c) {
-        // Check if the collider is from the player
+    void OnTriggerStay(Collider c) {
+    	// Check if the collider is from the player
         if (c.CompareTag("Player"))
-        anim.speed = 1;
+        // anim.speed = 1;
+        this.transform.position = ((this.transform.position) + (c.transform.position - this.transform.position)/5);
     }
+
+    // When collider is triggered, set animation speed to 1
+    // void OnTriggerEnter(Collider c) {
+    //     // Check if the collider is from the player
+    //     if (c.CompareTag("Player"))
+    //     // anim.speed = 1;
+    //     this.transform.position = ((this.transform.position) + (c.transform.position - this.transform.position)/10);
+    // }
 
     // When collider is exited, set animation speed to 0
     void OnTriggerExit(Collider c) {
         if (c.CompareTag("Player")) {
-            anim.Play("ApproachCollectable",0,0.0f);
-            anim.speed = 0;
+            // anim.Play("ApproachCollectable",0,0.0f);
+            // anim.speed = 0;
         }
     }
 }

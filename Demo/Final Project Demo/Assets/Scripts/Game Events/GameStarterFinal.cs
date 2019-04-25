@@ -10,9 +10,12 @@ public class GameStarterFinal : MonoBehaviour
 	GameObject winMenu;
 	CanvasGroup winMenuCanvas;
 
+    AudioSource gameMusic;
+
     public void StartGame() {
-        SceneManager.LoadScene("MAIN game");
+        SceneManager.LoadScene("Joshua_Final_Scene");
         Time.timeScale = 1f;
+
 
         CockpitTextScript.found = false;
         SatelliteTextScript.found = false;
@@ -20,6 +23,9 @@ public class GameStarterFinal : MonoBehaviour
 
         winMenu = GameObject.Find("Win_Menu_Canvas");
         winMenuCanvas = winMenu.GetComponent<CanvasGroup>();
+
+        gameMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
+        gameMusic.Play();
 
 		winMenuCanvas.interactable = false;
 		winMenuCanvas.blocksRaycasts = false;

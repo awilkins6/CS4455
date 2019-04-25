@@ -7,6 +7,7 @@ public class CollectablePickUp : MonoBehaviour
 {
 	public int temp;
 	private bool first = true;
+	public AudioSource pickUpSound;
 
     // When collider is triggered, remove parent game object from game
     void OnTriggerEnter(Collider c) {
@@ -16,6 +17,7 @@ public class CollectablePickUp : MonoBehaviour
 	        // Increment the number of points collected
 	        if (first) {
 	        	CurrencyScript.currency += 1;
+	        	GameManagerScript2.toggleMoney();
 	        }
 
 	        first = false;
