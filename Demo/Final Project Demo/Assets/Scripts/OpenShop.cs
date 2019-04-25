@@ -36,6 +36,7 @@ public class OpenShop : MonoBehaviour
                 shop.alpha = 1f;
                 Time.timeScale = 0f;
                 GameObject.Find("Cameraman").GetComponent<CameraController>().shopOpen = true;
+                CurrencyScript.noMoney = 0;
             }
         }
 

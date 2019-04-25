@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public float jumpPower;
     private bool grounded;
+    //public int grounded = 0;
 
   	public GameObject bullet;
   	public Transform bulletSpawn;
@@ -65,7 +66,11 @@ public class PlayerController : MonoBehaviour
                 grounded = false;
                 rb.AddForce(Vector3.up * jumpPower);
                 // Debug.Log("jump!");
-            }
+            }  
+            //else if (grounded == 1 && doubleJump) {
+            //    grounded = 2;
+            //    rb.AddForce(Vector3.up * jumpPower);
+            //}
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -90,10 +95,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-			foreach (ContactPoint contact in collision.contacts) {
-				if (contact.point.y < transform.position.y) {
-	        grounded = true;
-				}
+		foreach (ContactPoint contact in collision.contacts) {
+			if (contact.point.y < transform.position.y) {
+                grounded = true;
+			}
       }
     }
 
