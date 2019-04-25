@@ -67,6 +67,7 @@ public class GrappleController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) {
           if (!fired) {
+            GetComponent<PlayerController>().shootHook();
             fired = true;
             dir = camera.transform.forward.normalized;
             timer = maxTime;

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
 
     public AudioSource jumpSound;
+    public AudioSource hookSound;
 
     public float jumpPower;
     private bool grounded;
@@ -108,6 +109,10 @@ public class PlayerController : MonoBehaviour
     public void notCloseToShop()
     {
         nearShop = false;
+    }
+
+    public void shootHook() {
+        hookSound.Play();
     }
 
     // void updateShoot() {
