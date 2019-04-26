@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         costume.transform.position = Vector3.Lerp(costume.transform.position, transform.position, costumeSwingFactor);
 
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetButtonDown("Jump")) {
             if (grounded) {
                 grounded = false;
                 rb.AddForce(Vector3.up * jumpPower);
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.T) && turretPlaceTimer <= 0f)
+        if (Input.GetButtonDown("Build") && turretPlaceTimer <= 0f)
         {
             turretPlaceTimer = 1;
             // Debug.Log("spawn turret!");

@@ -19,7 +19,7 @@ public class OpenShop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < maxDist)
+        if (Input.GetButtonDown("Shop") && Vector3.Distance(player.transform.position, transform.position) < maxDist)
         {
             if (shop.interactable)
             {

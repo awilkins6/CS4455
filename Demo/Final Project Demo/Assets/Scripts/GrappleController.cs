@@ -66,7 +66,7 @@ public class GrappleController : MonoBehaviour
         //   hookedObject = null;
         // }
 
-        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0) {
+        if (Input.GetButtonDown("Grapple") && Time.timeScale > 0) {
           if (!fired) {
             GetComponent<PlayerController>().shootHook();
             fired = true;
@@ -77,7 +77,7 @@ public class GrappleController : MonoBehaviour
           }
         }
 
-        if (Input.GetMouseButton(0) && fired) {
+        if (Input.GetButton("Grapple") && fired) {
           hook.transform.parent = null;
           if (hookedObject) { //sticking
             hook.GetComponent<Rigidbody>().velocity = Vector3.zero;
