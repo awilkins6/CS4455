@@ -113,7 +113,6 @@ Nate Knauf:
 * Wrote the README
 
 Cesar Porcayo:
-* Terrain Sculpting
 * Environment & Level Design
 * Original Grapple Mechanic
 * Title Logo
