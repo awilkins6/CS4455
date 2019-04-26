@@ -5,9 +5,13 @@ A game by Team K-PAWP
 ## Team Members
 
 Nate Knauf - nate.knauf@gatech.edu - nknauf3
+
 Cesar Porcayo - cesarporcayo@gatech.edu - cporcayo3
+
 Eugene Ahn - eahn98@gatech.edu - eahn33
+
 Alexander Wilkins - awilkins6@gatech.edu - awilkins6
+
 Joshua Perry - jperry45@gatech.edu - jperry45
 
 ## How To Play
@@ -108,18 +112,22 @@ Nate Knauf:
 * Alien & Turret AI
 * Robot Locomotion & Controls
 * Wrote the README
+
 Cesar Porcayo:
 * Terrain Sculpting
 * Environment & Level Design
 * Original Grapple Mechanic
 * Title Logo
-Eugene Ahn - eahn98@gatech.edu - eahn33
+
+Eugene Ahn:
 * Upgrade Shop
 * Copywriting
-Alexander Wilkins - awilkins6@gatech.edu - awilkins6
+
+Alexander Wilkins:
 * Day-Night cycle
 * Alien Model & Animation
-Joshua Perry - jperry45@gatech.edu - jperry45
+
+Joshua Perry:
 * Collectible System - ship parts and currency
 * Collectible Animations
 * Start and Pause Menus
