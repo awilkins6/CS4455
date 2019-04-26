@@ -7,6 +7,7 @@ public class GrappleController : MonoBehaviour
     public GameObject hook;
     public GameObject hookHolder;
     public GameObject camera;
+    // public GameObject
 
     public float hookTravelSpeed;
     public float playerTravelSpeed;
@@ -65,7 +66,7 @@ public class GrappleController : MonoBehaviour
         //   hookedObject = null;
         // }
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0) {
           if (!fired) {
             GetComponent<PlayerController>().shootHook();
             fired = true;

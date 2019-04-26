@@ -9,7 +9,7 @@ public class OpenShop : MonoBehaviour
     public CanvasGroup shop;
     public bool playerNear = false;
     public GameObject player;
-    private float maxDist = 20f;
+    private float maxDist = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +27,7 @@ public class OpenShop : MonoBehaviour
                 shop.blocksRaycasts = false;
                 shop.alpha = 0f;
                 Time.timeScale = 1f;
+                GameObject.Find("Cameraman").GetComponent<CameraController>().shopOpen = false;
             }
             else
             {
@@ -34,6 +35,8 @@ public class OpenShop : MonoBehaviour
                 shop.blocksRaycasts = true;
                 shop.alpha = 1f;
                 Time.timeScale = 0f;
+                GameObject.Find("Cameraman").GetComponent<CameraController>().shopOpen = true;
+                CurrencyScript.noMoney = 0;
             }
         }
 
