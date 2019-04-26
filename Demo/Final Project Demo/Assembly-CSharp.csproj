@@ -150,6 +150,7 @@
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\FirstPersonController_EXAMPLE.cs" />
      <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\MouseLook_EXAMPLE.cs" />
      <Compile Include="Assets\SimpleCarController.cs" />
+     <Compile Include="Assets\test.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Space Kit\License.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />

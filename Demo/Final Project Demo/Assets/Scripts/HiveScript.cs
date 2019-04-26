@@ -39,7 +39,7 @@ public class HiveScript : MonoBehaviour
         int i = Random.Range(0, cloneList.Count);
         spawnPos = cloneList[i].transform.position;
         cloneList.RemoveAt(i);
-        Object.Instantiate(alienPrefab, spawnPos + 2f * Vector3.up, Quaternion.identity);
+        Object.Instantiate(alienPrefab, spawnPos + 2f * Vector3.up, Quaternion.Euler(180,180,180));
       }
     }
 }
