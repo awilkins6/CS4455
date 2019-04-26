@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretScript : MonoBehaviour
-{
+public class TurretScript : MonoBehaviour {
 
-    public enum AIState
-    {
+    public enum AIState {
         Idle,
         Targeting
     };
@@ -32,34 +30,35 @@ public class TurretScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+      switch(aiState) {
+        case AIState.Idle:
+          head.transform.rotation = Quaternion.Lerp(head.transform.rotation, transform.rotation, 0.2f);
+          break;
+        case AIState.Targeting:
+          if (target) {
+            head.transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.transform.position-transform.position).eulerAngles.y, 0);
 
-
-      if (target) {
-        head.transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.transform.position-transform.position).eulerAngles.y, 0);
-
-        if (bulletTimer <= 0) {
-          bulletTimer = bulletTime;
-          nb = Object.Instantiate(bulletPrefab, head.transform.position + 2f * head.transform.forward, Quaternion.identity).gameObject;
-          nb.GetComponent<BulletScript>().setTarget(target);
-          shotSound.Play();
-        } else {
-          bulletTimer -= Time.deltaTime;
-        }
-        // target.GetComponent<AlienScript>().doDamage(alienDamage*Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, target.transform.position) < 10f) {
-          target = null;
-        }
+            if (bulletTimer <= 0) {
+              bulletTimer = bulletTime;
+              nb = Object.Instantiate(bulletPrefab, head.transform.position + 2f * head.transform.forward, Quaternion.identity).gameObject;
+              nb.GetComponent<BulletScript>().setTarget(target);
+              shotSound.Play();
+            } else {
+              bulletTimer -= Time.deltaTime;
+            }
+          } else {
+            aiState = AIState.Idle;
+          }
+          break;
       }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
+    private void OnTriggerStay(Collider other) {
       if (!target) {
         if (other.gameObject.GetComponent<AlienScript>()) {
           target = other.gameObject;
+          aiState = AIState.Targeting;
         }
       }
     }

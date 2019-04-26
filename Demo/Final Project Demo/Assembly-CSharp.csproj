@@ -60,9 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AttachHook.cs" />
     <Compile Include="Assets\ghostPlayerAttach.cs" />
-    <Compile Include="Assets\HookRotate.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -111,30 +109,15 @@
     <Compile Include="Assets\ProgressBar\Scene\Demo.cs" />
     <Compile Include="Assets\ProgressBar\Script\ProgressBar.cs" />
     <Compile Include="Assets\ProgressBar\Script\ProgressBarCircle.cs" />
-    <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
-    <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
-    <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\AlienScript.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
-    <Compile Include="Assets\Scripts\BulletSpawnController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Collectables\CockpitPickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\CollectablePickUp.cs" />
     <Compile Include="Assets\Scripts\Collectables\CollectableProximity.cs" />
     <Compile Include="Assets\Scripts\Collectables\PartPickUpScript.cs" />
     <Compile Include="Assets\Scripts\Collectables\PartProximity.cs" />
-    <Compile Include="Assets\Scripts\Collectables\SatellitePickUp.cs" />
-    <Compile Include="Assets\Scripts\Collectables\WrenchPickUp.cs" />
     <Compile Include="Assets\Scripts\CurrencyScript.cs" />
     <Compile Include="Assets\Scripts\DayAndNightControl.cs" />
-    <Compile Include="Assets\Scripts\DayAndNightControlLight.cs" />
-    <Compile Include="Assets\Scripts\DayAndNightLights.cs" />
-    <Compile Include="Assets\Scripts\FollowScript.cs" />
     <Compile Include="Assets\Scripts\Game Events\GameQuitterFinal.cs" />
     <Compile Include="Assets\Scripts\Game Events\GameStarterFinal.cs" />
     <Compile Include="Assets\Scripts\Game Events\MenuStarterFinal.cs" />
@@ -155,10 +138,8 @@
     <Compile Include="Assets\Scripts\UI\SatelliteTextScript.cs" />
     <Compile Include="Assets\Scripts\UI\UICountdownScript.cs" />
     <Compile Include="Assets\Scripts\UI\WrenchTextScript.cs" />
-    <Compile Include="Assets\Scripts\UICurrencyScript.cs" />
     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\FirstPersonController_EXAMPLE.cs" />
     <Compile Include="Assets\Simple_Day_and_Night_Cycle\(EXAMPLEONLY)CharacterAssets\Characters\FirstPersonCharacter\Scripts\MouseLook_EXAMPLE.cs" />
-    <Compile Include="Assets\SimpleCarController.cs" />
     <Compile Include="Assets\test.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\Space Kit\License.txt" />
@@ -208,7 +189,6 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
-    <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/admin/Desktop/CS4455/final/CS4455/Demo/Final Project Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

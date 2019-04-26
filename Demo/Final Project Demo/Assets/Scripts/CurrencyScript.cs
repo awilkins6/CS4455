@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CurrencyScript : MonoBehaviour
-{
+public class CurrencyScript : MonoBehaviour {
     private Text currencyText;
     private Text moneyAlert;
 
@@ -17,8 +16,7 @@ public class CurrencyScript : MonoBehaviour
     GameObject player;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         currencyText = GetComponent<Text>() as Text;
         moneyAlert = GameObject.Find("ic_Text").GetComponent<Text>();
         ship = GameObject.FindWithTag("Ship");
@@ -26,8 +24,7 @@ public class CurrencyScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (currencyText) {
             currencyText.text = ": " + currency.ToString();
         }
@@ -46,8 +43,7 @@ public class CurrencyScript : MonoBehaviour
     }
 
     public void needMoney() {
-        if (noMoney == 1)
-        {
+        if (noMoney == 1) {
             moneyAlert.text = "You don't have enough Moon Stones for this.";
         } else if (noMoney == 2) {
             moneyAlert.text = "Upgraded!";
@@ -64,15 +60,13 @@ public class CurrencyScript : MonoBehaviour
         if ((currency - cost) >= 0) {
             GameManagerScript2.toggleBuy();
             currency -= cost;
-            //if (currency == 0) {
-            //  noMoney = true;
-            //}
-            Debug.Log("Item Bought: " + selectedItem);
+
+            // Debug.Log("Item Bought: " + selectedItem);
 
             switch (selectedItem) {
               case "Health":
                     noMoney = 2;
-                Debug.Log("replenish ship health");
+                // Debug.Log("replenish ship health");
                 ship.GetComponent<ShipHealth>().doDamage(-30);
                 break;
               case "Speed":
@@ -86,11 +80,11 @@ public class CurrencyScript : MonoBehaviour
                 break;
               case "Damage":
                 noMoney = 2;
-                Debug.Log("increased turret damage by 2");
+                // Debug.Log("increased turret damage by 2");
                 TurretScript.augmentDamage();
                 break;
               default:
-                Debug.Log("nothing purchased");
+                // Debug.Log("nothing purchased");
                 break;
             }
         } else {

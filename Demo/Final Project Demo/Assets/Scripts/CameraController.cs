@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
+
   	public GameObject player;
     public GameObject pole;
     public GameObject camera;
@@ -22,25 +22,15 @@ public class CameraController : MonoBehaviour
     public float maxDist = 5f;
     private float buffer = 0.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        if (!shopOpen)
-        {
+    void Update() {
+        if (!shopOpen) {
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
-
             pitch = Mathf.Clamp(pitch, -60, 60);
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
+        
         transform.position = player.transform.position + offset;
-
-
 
         ray = new Ray(pole.transform.position, -1 * pole.transform.forward);
         if (Physics.Raycast(ray, out hit)) {

@@ -13,10 +13,8 @@ public class DayColors
 }
 
 public class DayAndNightControl : MonoBehaviour {
+
 	public bool StartDay; //start game as day time
-	public GameObject StarDome;
-	public GameObject moonState;
-	public GameObject moon;
 	public DayColors dawnColors;
 	public DayColors dayColors;
 	public DayColors nightColors;
@@ -40,16 +38,8 @@ public class DayAndNightControl : MonoBehaviour {
 	public string dayState;
   public GameObject TOD_Text;
 
-	Camera targetCam;
-
 	// Use this for initialization
 	void Start () {
-		foreach (Camera c in GameObject.FindObjectsOfType<Camera>())
-		{
-			if (c.isActiveAndEnabled) {
-				targetCam = c;
-			}
-		}
 		lightIntensity = dayLight.intensity; //what's the current intensity of the light
 		if (StartDay) {
 			currentTime = 0.3f; //start at morning
@@ -69,17 +59,7 @@ public class DayAndNightControl : MonoBehaviour {
 
   float intensityMultiplier = 1;
 
-	void UpdateLight()
-	{
-		StarDome.transform.Rotate (new Vector3 (0, 2f * Time.deltaTime, 0));
-		moon.transform.LookAt (targetCam.transform);
-		//directionalLight.transform.localRotation = Quaternion.Euler ((currentTime * 360f) - 90, 170, 0);
-		moonState.transform.localRotation = Quaternion.Euler ((currentTime * 360f) - 100, 170, 0);
-		//^^ we rotate the sun 360 degrees around the x axis, or one full rotation times the current time variable. we subtract 90 from this to make it go up
-		//in increments of 0.25.
-
-		//the 170 is where the sun will sit on the horizon line. if it were at 180, or completely flat, it would be hard to see. Tweak this value to what you find comfortable.
-
+	void UpdateLight() {
 
     if (currentTime <= 0.2f) {
       if (!dayState.Equals("Midnight")) {
@@ -91,7 +71,7 @@ public class DayAndNightControl : MonoBehaviour {
       RenderSettings.ambientSkyColor = nightColors.skyColor;
       RenderSettings.ambientEquatorColor = nightColors.equatorColor;
       RenderSettings.ambientGroundColor = nightColors.horizonColor;
-    } else if (currentTime <= 0.5f) {
+    } else if (currentTime <= 0.3f) {
       dayState = "Morning";
   		intensityMultiplier = Mathf.Clamp01((currentTime - 0.23f) * (1 / 0.02f));
       RenderSettings.ambientSkyColor = dawnColors.skyColor;
@@ -119,7 +99,7 @@ public class DayAndNightControl : MonoBehaviour {
       RenderSettings.ambientGroundColor = nightColors.horizonColor;
     }
 
-		if (currentTime >= 0.2f && currentTime <= 0.8f) {
+		if (currentTime >= 0.3f && currentTime <= 0.8f) {
       RenderSettings.skybox = daySkybox;
 			dayLight.transform.localRotation = Quaternion.Euler ((currentTime * 360f) - 90, 170, 0);
       nightLight.gameObject.SetActive(false);
@@ -133,22 +113,7 @@ public class DayAndNightControl : MonoBehaviour {
 		dayLight.intensity = lightIntensity * intensityMultiplier;
 	}
 
-  bool spawnedAliensToday = false;
-
-	public string TimeOfDay ()
-	{
-	   // dayState = "";
+	public string TimeOfDay () {
 		return dayState;
 	}
-
-	// void OnGUI()
-	// {
-	// 	//debug GUI on screen visuals
-	// 	// if (showUI) {
-	// 	// 	GUILayout.Box ("Day: " + currentDay);
-	// 	// 	GUILayout.Box (TimeOfDay ());
-	// 	// 	GUILayout.Box ("Time slider");
-	// 	// 	GUILayout.VerticalSlider (currentTime, 0f, 1f);
-	// 	// }
-	// }
 }

@@ -7,7 +7,6 @@ public class GrappleController : MonoBehaviour
     public GameObject hook;
     public GameObject hookHolder;
     public GameObject camera;
-    // public GameObject
 
     public float hookTravelSpeed;
     public float playerTravelSpeed;
@@ -22,9 +21,6 @@ public class GrappleController : MonoBehaviour
     private float currentDistance;
 
     public Vector3 dir;
-    // private Vector3 target;
-    // private RaycastHit hit;
-    // private Ray ray;
 
     private float timer = 0f;
     private float maxTime = 5f;
@@ -36,35 +32,7 @@ public class GrappleController : MonoBehaviour
       lr = hook.GetComponent<LineRenderer>();
     }
 
-    void Update()
-    {
-        //firing hook by left clicking mouse
-
-        // clicking = Input.GetMouseButton(0);
-
-        // if (Input.GetMouseButtonDown(0)) {
-        //   if (fired) {
-        //     fired = false;
-        //     ReturnHook();
-        //   } else {
-        //     // Debug.DrawRay(ray.origin, ray.direction*10, Color.blue, 10f);
-        //     // dir = ray.direction.normalized;
-        //     // fired = true;
-        //     // timer = maxTime;
-        //     if (Physics.Raycast(ray, out hit)) {
-        //         // Debug.Log("hit!!");
-        //         fired = true;
-        //         dir = (hit.point - hook.transform.position).normalized;
-        //         Debug.DrawRay(hook.transform.position, hit.point - hook.transform.position, Color.green, 10f);
-        //         // hookedObject = hit.transform.gameObject;
-        //         fired = true;
-        //         timer = maxTime;
-        //         // Do something with the object that was hit by the raycast.
-        //     }
-        //   }
-        //   // hook.transform.position = hookHolder.transform.position;
-        //   hookedObject = null;
-        // }
+    void Update() {
 
         if (Input.GetButtonDown("Grapple") && Time.timeScale > 0) {
           if (!fired) {

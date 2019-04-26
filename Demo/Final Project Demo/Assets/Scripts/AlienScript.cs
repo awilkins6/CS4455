@@ -4,15 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AlienScript : MonoBehaviour
-{
-    public GameObject[] waypoints;
-    public int currWaypoint = 0;
-    // private Animator anim;
+public class AlienScript : MonoBehaviour {
+
     private NavMeshAgent agent;
-    // Start is called before the first frame update
-    public enum AIState
-    {
+
+    public enum AIState {
         Patrol,
         SeekTarget,
         Wait,
@@ -35,9 +31,7 @@ public class AlienScript : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
-
-    void Start()
-    {
+    void Start() {
         // anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         aiState = AIState.SeekingShip;
@@ -48,26 +42,8 @@ public class AlienScript : MonoBehaviour
         camera = GameObject.FindWithTag("MainCamera");
     }
 
-    // public float dist;
-    // public float lookAheadTime;
-    // public Vector3 targetVel;
-    // public Vector3 targetPos;
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        // anim.SetFloat("vely", agent.velocity.magnitude / agent.speed);
-
-        switch(aiState)
-        {
-            //case AIState.SeekingShip:
-                //if (!agent.pathPending && agent.remainingDistance < 0.5f)
-                //{
-                //    t = 0.5f;
-                //    aiState = AIState.Wait;
-                //}
-                //break;
+    void Update() {
+        switch(aiState) {
             case AIState.SeekingShip:
                 if (!agent.pathPending)
                 {
@@ -93,8 +69,6 @@ public class AlienScript : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision c) {
-        // Debug.Log(c);
-        // Debug.Log(c.gameObject.name);
         if (c.gameObject == ship) {
           foundShip();
         }
@@ -107,10 +81,8 @@ public class AlienScript : MonoBehaviour
       health -= damage;
     }
 
-    public void foundShip()
-    {
-        if (aiState != AIState.AttackingShip)
-        {
+    public void foundShip() {
+        if (aiState != AIState.AttackingShip) {
             rb.Sleep();
             // Debug.Log("Found Ship");
             agent.SetDestination(transform.position);

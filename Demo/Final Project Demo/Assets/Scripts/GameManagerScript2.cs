@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManagerScript2 : MonoBehaviour
-{
+public class GameManagerScript2 : MonoBehaviour {
 
     public AudioSource gameMusic;
     public AudioSource winMusic;
@@ -12,7 +11,6 @@ public class GameManagerScript2 : MonoBehaviour
     public AudioSource partSound;
     public AudioSource buySound;
     public AudioSource enemyDeathSound;
-
 
     public static bool money;
     public static bool part;
@@ -52,9 +50,7 @@ public class GameManagerScript2 : MonoBehaviour
       part = false;
     }
 
-    void Start()
-    {
-
+    void Start() {
       player = GameObject.FindWithTag("Player");
       gameState = GameState.GAME;
       dayState = gameObject.GetComponent<DayAndNightControl>().dayState;
