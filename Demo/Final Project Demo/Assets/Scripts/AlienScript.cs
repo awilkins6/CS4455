@@ -33,6 +33,7 @@ public class AlienScript : MonoBehaviour
     public float hitFactor = 10f;
 
     private Rigidbody rb;
+    private Animator animator;
 
 
     void Start()
@@ -43,6 +44,7 @@ public class AlienScript : MonoBehaviour
         ship = GameObject.FindGameObjectWithTag("Ship");
         shipHealth = ship.GetComponent<ShipHealth>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         camera = GameObject.FindWithTag("MainCamera");
     }
 
@@ -71,11 +73,15 @@ public class AlienScript : MonoBehaviour
                 {
                     agent.SetDestination(ship.transform.position);
                 }
+                animator.SetBool("attack", false);
+                animator.SetBool("walk", true);
                 break;
             case AIState.AttackingShip:
                 shipHealth.doDamage(2f*Time.deltaTime);
                 rb.isKinematic = true;
                 //Debug.Log("do nothing");
+                animator.SetBool("attack", true);
+                animator.SetBool("walk", false);
                 break;
         }
         healthBar.transform.LookAt(camera.transform);

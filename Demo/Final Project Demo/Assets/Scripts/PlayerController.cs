@@ -66,17 +66,11 @@ public class PlayerController : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            // Debug.Log("space");
             if (grounded) {
                 grounded = false;
                 rb.AddForce(Vector3.up * jumpPower);
                 jumpSound.Play();
-                // Debug.Log("jump!");
             }
-            //else if (grounded == 1 && doubleJump) {
-            //    grounded = 2;
-            //    rb.AddForce(Vector3.up * jumpPower);
-            //}
         }
 
         if (Input.GetKeyDown(KeyCode.T) && turretPlaceTimer <= 0f)

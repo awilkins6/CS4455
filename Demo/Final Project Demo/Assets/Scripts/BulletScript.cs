@@ -26,13 +26,13 @@ public class BulletScript : MonoBehaviour
       // }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
       if (other.gameObject.GetComponent<AlienScript>()) {
         other.gameObject.GetComponent<AlienScript>().doDamage(TurretScript.alienDamage);
+        Object.Destroy(gameObject);
       }
-      Object.Destroy(gameObject);
-      Debug.Log(other.gameObject.name);
+      // Debug.Log(other.gameObject.name);
     }
 
 }

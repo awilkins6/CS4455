@@ -19,12 +19,6 @@ public class HiveScript : MonoBehaviour
       }
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     Vector3 spawnPos;
     public void spawnAliens (int day) {
       int alienCount = Mathf.Clamp(baseSpawn + dailySpawn*day, 0, alienSpawns.Count);

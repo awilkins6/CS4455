@@ -103,6 +103,7 @@ public class CurrencyScript : MonoBehaviour
     public static bool buyTurret() {
       if (currency - turretPrice >= 0) {
         currency -= turretPrice;
+        GameManagerScript2.toggleBuy();
         return true;
       }
       return false;
