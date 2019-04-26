@@ -107,8 +107,7 @@ Icons from Unity Standard Assets
 ## Who did what:
 
 Nate Knauf:
-* Project Management
-* Merging & Interoperability
+* Project Management, Merging & Interoperability
 * Alien & Turret AI
 * Robot Locomotion & Controls
 * Wrote the README
