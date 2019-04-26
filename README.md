@@ -121,7 +121,6 @@ Cesar Porcayo:
 
 Eugene Ahn:
 * Upgrade Shop
-* Copywriting
 
 Alexander Wilkins:
 * Day-Night cycle
@@ -131,6 +130,11 @@ Joshua Perry:
 * Collectible System - ship parts and currency
 * Collectible Animations
 * Start and Pause Menus
+
+Everyone:
+* Game Pitch
+* Playtesting
+* Playtest Analysis
 
 ## Unity Scenes
 
