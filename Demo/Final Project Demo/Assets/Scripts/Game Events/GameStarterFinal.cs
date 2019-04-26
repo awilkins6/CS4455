@@ -13,7 +13,7 @@ public class GameStarterFinal : MonoBehaviour
   AudioSource gameMusic;
 
   public void StartGame() {
-    SceneManager.LoadScene("Joshua_Final_Scene");
+    SceneManager.LoadScene("MAIN game");
     Time.timeScale = 1f;
 
 

@@ -8,7 +8,7 @@ public class MenuStarterFinal : MonoBehaviour
 {
 
     public void StartGame() {
-        SceneManager.LoadScene("Game_Menu");
+        SceneManager.LoadScene("MAIN menu");
         Time.timeScale = 1f;
 
     }
