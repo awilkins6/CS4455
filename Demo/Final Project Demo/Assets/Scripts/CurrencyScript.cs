@@ -15,16 +15,14 @@ public class CurrencyScript : MonoBehaviour
 
     GameObject ship;
     GameObject player;
-    GameObject turret;
 
     // Start is called before the first frame update
     void Start()
     {
         currencyText = GetComponent<Text>() as Text;
-        moneyAlert = GameObject.Find("ic_Text").GetComponent<Text>(); 
+        moneyAlert = GameObject.Find("ic_Text").GetComponent<Text>();
         ship = GameObject.FindWithTag("Ship");
         player = GameObject.FindWithTag("Player");
-        turret = GameObject.FindWithTag("Turret(Clone)");
     }
 
     // Update is called once per frame
@@ -41,6 +39,9 @@ public class CurrencyScript : MonoBehaviour
     }
 
     public void setItem(string item) {
+        if (selectedItem != item) {
+          moneyAlert.text = "";
+        }
         selectedItem = item;
     }
 
@@ -76,23 +77,22 @@ public class CurrencyScript : MonoBehaviour
                 break;
               case "Speed":
                     noMoney = 2;
-                player.GetComponent<PlayerController>().maxSpeed = player.GetComponent<PlayerController>().maxSpeed * 1.5f;
+                player.GetComponent<PlayerController>().maxSpeed = player.GetComponent<PlayerController>().maxSpeed * 1.2f;
+                // player.GetComponent<PlayerController>().speed = player.GetComponent<PlayerController>().speed * 1.2f;
                 break;
               case "Jump":
                     noMoney = 2;
                 player.GetComponent<PlayerController>().jumpPower += 200f;
                 break;
-                case "Damage":
-                    noMoney = 2;
-                    Debug.Log("increased turret damage by 2");
-                    turret.GetComponent<TurretScript>().alienDamage += 2f;
-                    break;
+              case "Damage":
+                noMoney = 2;
+                Debug.Log("increased turret damage by 2");
+                TurretScript.augmentDamage();
+                break;
               default:
                 Debug.Log("nothing purchased");
                 break;
             }
-            
-
         } else {
             noMoney = 1;
         }

@@ -14,17 +14,12 @@ public class PartPickUpScript : MonoBehaviour
       gameManager = GameObject.FindWithTag("GameManager");
     }
 
-    // When collider is triggered, remove parent game object from game
-    void OnTriggerEnter(Collider c) {
-        if (c.CompareTag("Player")) {
-          GameManagerScript2.togglePart();
-          found = true;
-          gameObject.SetActive(false);
-          gameManager.GetComponent<GameManagerScript2>().UpdateParts();
-        }
-    }
-
     void OnCollisionEnter(Collision c) {
-      pickUpJingle.Play();
+      if (c.gameObject.CompareTag("Player")) {
+        gameManager.GetComponent<GameManagerScript2>().playJingle();
+        found = true;
+        gameManager.GetComponent<GameManagerScript2>().UpdateParts();
+        gameObject.SetActive(false);
+      }
     }
 }

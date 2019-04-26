@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     //public int grounded = 0;
 
-  	public GameObject bullet;
-  	public Transform bulletSpawn;
+  	// public GameObject bullet;
+  	// public Transform bulletSpawn;
 
-  	public float fireRate;
-  	private float nextFire;
+  	// public float fireRate;
+  	// private float nextFire;
   	public float turnSpeed = 0.25f;
 
   	private bool nearShop = false;
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public GameObject costume;
     public float costumeSwingFactor = 0.9f;
 		private GameObject camera;
+
+    private float turretPlaceTimer = 0f;
 
     [SerializeField]
     public Transform turretPrefab;
@@ -39,12 +41,12 @@ public class PlayerController : MonoBehaviour
 			camera = GameObject.FindWithTag("MainCamera");
     }
 
-    void update() {
-    	if (Input.GetButton("Fire1") && Time.time > nextFire) {
-    		nextFire = Time.time + fireRate;
-    		Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-    	}
-    }
+    // void Update() {
+    // 	if (Input.GetButton("Fire1") && Time.time > nextFire) {
+    // 		nextFire = Time.time + fireRate;
+    // 		Instantiate(bullet, transform.position + transform.forward, bulletSpawn.rotation);
+    // 	}
+    // }
 
 		Quaternion turretRot = Quaternion.identity;
 
@@ -70,15 +72,16 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpPower);
                 jumpSound.Play();
                 // Debug.Log("jump!");
-            }  
+            }
             //else if (grounded == 1 && doubleJump) {
             //    grounded = 2;
             //    rb.AddForce(Vector3.up * jumpPower);
             //}
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && turretPlaceTimer <= 0f)
         {
+            turretPlaceTimer = 1;
             // Debug.Log("spawn turret!");
 						turretRot = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
 						ray = new Ray(transform.position + turretRot * Vector3.forward * 2f, -1 * Vector3.up);
@@ -89,6 +92,8 @@ public class PlayerController : MonoBehaviour
 								}
 							}
 						}
+        } else {
+          turretPlaceTimer -= Time.deltaTime;
         }
 
         if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
@@ -99,10 +104,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-		foreach (ContactPoint contact in collision.contacts) {
-			if (contact.point.y < transform.position.y) {
-                grounded = true;
-			}
+  		foreach (ContactPoint contact in collision.contacts) {
+  			if (contact.point.y < transform.position.y) {
+                  grounded = true;
+  			}
       }
     }
 

@@ -11,11 +11,13 @@ public class GameManagerScript2 : MonoBehaviour
     public AudioSource moneySound;
     public AudioSource partSound;
     public AudioSource buySound;
+    public AudioSource enemyDeathSound;
 
 
     public static bool money;
     public static bool part;
     public static bool buy;
+    public static bool enemyDeath;
 
     public GameObject nightLight;
     enum GameState{
@@ -26,7 +28,7 @@ public class GameManagerScript2 : MonoBehaviour
     	LOSE
     };
     GameState gameState;
-    	
+
       ShipHealth shipHealth;
     	GameObject ship;
     // Start is called before the first frame update
@@ -79,9 +81,6 @@ public class GameManagerScript2 : MonoBehaviour
       if (foundParts == shipParts.Length) {
         winMusic.Play();
         gameState = GameState.WIN;
-      } else if (part) {
-        partSound.Play();
-        part = false;
       }
     }
 
@@ -127,6 +126,11 @@ public class GameManagerScript2 : MonoBehaviour
         buy = false;
       }
 
+      if (enemyDeath) {
+        enemyDeathSound.Play();
+        enemyDeath = false;
+      }
+
       if (Input.GetKeyUp (KeyCode.Escape)) {
         if (gameMusic.isPlaying) {
           gameMusic.Pause();
@@ -155,16 +159,20 @@ public class GameManagerScript2 : MonoBehaviour
       alienHive.GetComponent<HiveScript>().spawnAliens(GetComponent<DayAndNightControl>().currentDay);
       spawnedAliensToday = true;
     }
-    
+
     public static void toggleMoney() {
       money = true;
     }
 
-    public static void togglePart() {
-      part = true;
-    }
-
     public static void toggleBuy() {
       buy = true;
+    }
+
+    public void playJingle() {
+      partSound.Play();
+    }
+
+    public static void enemyDied() {
+      enemyDeath = true;
     }
 }

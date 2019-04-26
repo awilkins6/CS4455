@@ -80,6 +80,10 @@ public class AlienScript : MonoBehaviour
         }
         healthBar.transform.LookAt(camera.transform);
         progressBar.GetComponent<ProgressBar>().BarValue = health;
+
+        if (health <= 0f) {
+          Die();
+        }
     }
 
     void OnCollisionEnter(Collision c) {
@@ -95,9 +99,6 @@ public class AlienScript : MonoBehaviour
 
     public void doDamage(float damage) {
       health -= damage;
-      if (health <= 0f) {
-        Die();
-      }
     }
 
     public void foundShip()
@@ -114,6 +115,7 @@ public class AlienScript : MonoBehaviour
     }
 
     public void Die() {
+      GameManagerScript2.enemyDied();
       Destroy(gameObject);
     }
 }
